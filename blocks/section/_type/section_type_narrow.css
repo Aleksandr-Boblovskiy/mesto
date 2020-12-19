@@ -1,0 +1,9 @@
+.section_type_narrow {
+  max-width: 100%;
+}
+
+@media screen and (max-width: 898px){
+  .section_type_narrow {
+    max-width: calc(100% - 19px*2);
+  }
+}

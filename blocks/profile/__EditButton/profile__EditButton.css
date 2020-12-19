@@ -1,0 +1,14 @@
+.profile__EditButton {
+  margin: 8px 0 0 18px;
+}
+
+@media screen and (max-width: 898px) {
+  .profile__EditButton {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    position: absolute;
+    right: -28px;
+    top: 8px;
+  }
+}

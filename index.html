@@ -12,25 +12,26 @@
 <body class="page">
   <div class="page__container">
     <header class="header section page_header">
-      <div class="logo header__logo">
-        <img class="logo__image" src="./images/logo.svg" alt="Логотип место Россия">
-      </div>
+      <img class="header__logo" src="./images/logo.svg" alt="Логотип место Россия">
       <div class="header__line">
       </div>
     </header>
     <main class="content page__content">
-      <section class="profile content__section section">
-        <div class="profile_place">
+      <section class="profile content__section section section_type_narrow">
+        <div class="profile__place">
           <img class="profile__avatar" src="./images/Avatar.jpg" alt="Фото пользователя">
           <div class="profile__info">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <img class="profile__EditButton" src="./images/EditButton.svg" alt="Кнопка редактировать профиль">
+            <div class="profile__title-Button">
+              <h1 class="profile__title">Жак-Ив Кусто</h1>
+              <img class="profile__EditButton" src="./images/EditButton.svg" alt="Кнопка редактировать профиль">
+            </div>
             <p class="profile__subtitle">Исследователь океана</p>
           </div>
         </div>
-        <img class="profile__AddButton" src="./images/AddButton.svg" alt="Кнопка добавить новый профиль">
+        <img class="profile__AddButton" src="./images/Add-Button.png" alt="Кнопка добавить новый профиль">
+        <img class="profile__AddButton-mobile" src="./images/Add-Button-mobile.png" alt="Кнопка добавить новый профиль">
       </section>
-      <section class="elements section content__section">
+      <section class="elements section content__section section_type_narrow">
         <ul class="elemensts__list">
           <li class="elemensts_element">
             <img class="elements__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Заброшенный монастырь">
@@ -77,6 +78,11 @@
         </ul>
       </section>
     </main>
+    <footer class="footer section page_footer section_type_narrow">
+      <p class="footer__copyright">
+        © 2020 Mesto Russia
+      </p>
+    </footer>
   </div>
 </body>
 
