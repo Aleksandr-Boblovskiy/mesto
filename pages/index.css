@@ -3,7 +3,7 @@
 @import url('../blocks/page/page.css');
 @import url('../blocks/section/section.css');
 @import url('../blocks/page/__container/page__container.css');
-@import url('../blocks/page/__header/page_header.css');
+@import url('../blocks/page/__header/page__header.css');
 @import url('../blocks/header/header.css');
 @import url('../blocks/header/__logo/header__logo.css');
 @import url('../blocks/header/__line/header__line.css');
@@ -22,13 +22,13 @@
 @import url('../blocks/profile/__AddButton-mobile/profile__AddButton-mobile.css');
 @import url('../blocks/elements/elements.css');
 @import url('../blocks/elements/__list/elemensts__list.css');
-@import url('../blocks/elements/__element/elemensts_element.css');
+@import url('../blocks/elements/__element/elemensts__element.css');
 @import url('../blocks/elements/__image/elements__image.css');
 @import url('../blocks/elements/__title/elemensts__title.css');
-@import url('../blocks/elements/__text/elements_text.css');
+@import url('../blocks/elements/__text/elements__text.css');
 @import url('../blocks/elements/__like/elements__like.css');
 @import url('../blocks/footer/footer.css');
-@import url('../blocks/page/__footer/page_footer.css');
+@import url('../blocks/page/__footer/page__footer.css');
 @import url('../blocks/footer/__copyright/footer__copyright.css');
 @import url('../blocks/section/_type/section_type_narrow.css');
 @import url('../blocks/popup/popup.css');
