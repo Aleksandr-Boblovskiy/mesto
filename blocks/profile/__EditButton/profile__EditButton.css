@@ -1,5 +1,10 @@
 .profile__EditButton {
-  margin: 8px 0 0 18px;
+  margin: 0 0 0 18px;
+  cursor: pointer;
+}
+
+.profile__EditButton:hover {
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 898px) {

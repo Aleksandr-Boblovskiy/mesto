@@ -1,6 +1,7 @@
 .profile__title-Button {
   display: flex;
   align-items: center;
+  place-items: baseline;
 }
 
 @media screen and (max-width: 898px) {

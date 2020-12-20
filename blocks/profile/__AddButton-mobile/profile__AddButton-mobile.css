@@ -1,5 +1,10 @@
 .profile__AddButton-mobile {
   display: none;
+  cursor: pointer;
+}
+
+.profile__AddButton-mobile:hover {
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 898px) {
