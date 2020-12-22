@@ -1,5 +1,5 @@
 .header__logo {
-
+  box-sizing: border-box;
 }
 
 @media screen and (max-width: 898px){
@@ -9,3 +9,4 @@
     height: 24.4px;
   }
 }
+

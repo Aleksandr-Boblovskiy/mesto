@@ -1,3 +1,13 @@
 .header {
   font-family: 'Inter', Arial, sans-serif;
+  padding-bottom: 36px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.5);
+}
+
+
+
+@media screen and (max-width: 898px) {
+  .header {
+    padding-bottom: 29px;
+  }
 }

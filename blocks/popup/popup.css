@@ -8,15 +8,10 @@
   background: rgba(0, 0, 0, 0.5);
   display: none;
   justify-content: center;
-  padding-top: 195px;
-  align-items: flex-start;
+  align-items: center;
 }
 
-@media screen and (max-width: 540px) {
-  .popup {
-    padding-top: 123px;
-  }
-}
+
 
 
 

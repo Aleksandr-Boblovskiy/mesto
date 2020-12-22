@@ -4,9 +4,14 @@
   right: -40px;
   height: 40px;
   width: 40px;
-  transform: rotate(-45deg);
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
   cursor: pointer;
   transition: opacity 0.2s;
+  background: url('../../../images/close-icon.svg');
+  transform: rotate(-45deg);
 }
 
 .popup__close:hover {
@@ -18,5 +23,6 @@
     right: 0;
     width: 26px;
     height: 26px;
+    background:  url('../../../images/close-icon-mobile.svg');
   }
 }

@@ -1,4 +1,4 @@
-.profile__title-Button {
+.profile__title-button {
   display: flex;
   align-items: center;
   place-items: baseline;
@@ -6,7 +6,7 @@
 }
 
 @media screen and (max-width: 898px) {
-  .profile__title-Button {
+  .profile__title-button {
     box-sizing: border-box;
     justify-content: center;
     align-items: center;

@@ -13,23 +13,20 @@
   <div class="page__container">
     <header class="header section page__header">
       <img class="header__logo" src="./images/logo.svg" alt="Логотип место Россия">
-      <div class="header__line">
-      </div>
     </header>
     <main class="content page__content">
       <section class="profile content__section section section_type_narrow">
         <div class="profile__place">
           <img class="profile__avatar" src="./images/Avatar.jpg" alt="Фото пользователя">
           <div class="profile__info">
-            <div class="profile__title-Button">
+            <div class="profile__title-button">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
-              <img class="profile__EditButton" src="./images/EditButton.svg" alt="Кнопка редактировать профиль">
+              <button type="button" class="profile__edit-button">
             </div>
             <p class="profile__subtitle">Исследователь океана</p>
           </div>
         </div>
-        <img class="profile__AddButton" src="./images/Add-Button.png" alt="Кнопка добавить новый профиль">
-        <img class="profile__AddButton-mobile" src="./images/Add-Button-mobile.png" alt="Кнопка добавить новый профиль">
+        <button type="button" class="profile__add-button">
       </section>
       <section class="elements section content__section section_type_narrow">
         <ul class="elements__list">
@@ -77,21 +74,21 @@
           </li>
         </ul>
       </section>
-      <section class="popup section content__section">
-        <form class="popup__container">
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <input type="text" class="popup__name">
-          <input type="text" class="popup__subname">
-          <button type="submit" class="popup__button">Сохранить</button>
-          <img src="./images/Close_Icon.png" class="popup__close" alt="Закрыть">
-        </form>
-      </section>
     </main>
     <footer class="footer section page__footer section_type_narrow">
       <p class="footer__copyright">
         © 2020 Mesto Russia
       </p>
     </footer>
+    <section class="popup section content__section">
+      <form class="popup__container">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input type="text" class="popup__name">
+        <input type="text" class="popup__subname">
+        <button type="submit" class="popup__button">Сохранить</button>
+        <button type="button" class="popup__close">
+      </form>
+    </section>
   </div>
   <script src="./scripts/scripts.js"></script>
 </body>

@@ -6,7 +6,10 @@
   text-align: center;
   color: #FFFFFF;
   background: #000000;
+  border: none;
   border-radius: 2px;
+  margin: 0;
+  padding: 0;
   margin-top: 48px;
   margin-bottom: 40px;
   cursor: pointer;
