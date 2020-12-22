@@ -2,10 +2,15 @@
   display: flex;
   align-items: center;
   place-items: baseline;
+  margin-bottom: 8px;
 }
 
 @media screen and (max-width: 898px) {
   .profile__title-Button {
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
     position: relative;
+    max-width: calc(100% - 28px);
   }
 }
