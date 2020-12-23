@@ -3,9 +3,9 @@ let popup = document.querySelector('.popup');
 let closeButton = document.querySelector('.popup__close');
 let form = document.querySelector('.popup__container');
 let titleName = document.querySelector('.profile__title');
-let username = document.querySelector('.popup__name');
+let username = document.querySelector('.popup__input_name_full-name');
 let subName = document.querySelector('.profile__subtitle');
-let occupation = document.querySelector('.popup__subname');
+let occupation = document.querySelector('.popup__input_name_occupation');
 let like = document.querySelectorAll('.element__like');
 
 function tooglePopup() {

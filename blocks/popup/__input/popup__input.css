@@ -1,16 +1,20 @@
-.popup__subname {
+.popup__input {
   width: 358px;
   height: 27px;
   font-size: 14px;
   line-height: 17px;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
   box-sizing: border-box;
 }
 
+.popup__input:last-child {
+  margin-bottom: 0;
+}
 
 @media screen and (max-width: 540px) {
-  .popup__subname {
+  .popup__input {
     width: 238px;
   }
 }
