@@ -11,6 +11,15 @@
   background-size: cover;
 }
 
+.profile__edit-button:focus {
+  outline: none;
+}
+
+.profile__edit-button:active {
+  outline: none;
+}
+
+
 .profile__edit-button:hover {
   opacity: 0.8;
 }

@@ -81,13 +81,15 @@
       </p>
     </footer>
     <section class="popup section content__section">
-      <form class="popup__container">
+      <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input type="text" class="popup__input popup__input_name_full-name" name="fullname" placeholder="Иванов Иван">
-        <input type="text" class="popup__input popup__input_name_occupation" name="occupation" placeholder="Студент">
-        <button type="submit" class="popup__button">Сохранить</button>
-        <button type="button" class="popup__close">
-      </form>
+        <form class="popup__form" name="popup-user" action="" method="POST">
+          <input type="text" class="popup__input popup__input_name_full-name" name="fullname" placeholder="Иванов Иван">
+          <input type="text" class="popup__input popup__input_name_occupation" name="occupation" placeholder="Студент">
+          <button type="submit" class="popup__button">Сохранить</button>
+        </form>
+        <button type="button" class="popup__close"></button>
+      </div>
     </section>
   </div>
   <script src="./scripts/scripts.js"></script>
