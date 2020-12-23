@@ -6,7 +6,7 @@ let titleName = document.querySelector('.profile__title');
 let username = document.querySelector('.popup__name');
 let subName = document.querySelector('.profile__subtitle');
 let occupation = document.querySelector('.popup__subname');
-let like = document.querySelectorAll('.elements__like');
+let like = document.querySelectorAll('.element__like');
 
 function tooglePopup() {
   popup.classList.toggle('popup_active');
@@ -36,6 +36,6 @@ form.addEventListener('submit', savePopup);
 
 like.forEach((value) => {
   value.addEventListener('click', () => {
-    value.classList.toggle('elements__like_active');
+    value.classList.toggle('element__like_active');
   });
 });

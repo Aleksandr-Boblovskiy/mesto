@@ -1,4 +1,4 @@
-.elements__like {
+.element__like {
   margin: 0;
   padding: 0;
   border: none;
@@ -12,14 +12,14 @@
   height: 18px;
 }
 
-.elements__like:active {
+.element__like:active {
   outline: none;
 }
 
-.elements__like:focus {
+.element__like:focus {
   outline: none;
 }
 
-.elements__like:hover {
+.element__like:hover {
   opacity: 0.8;
 }
