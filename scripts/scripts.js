@@ -36,7 +36,7 @@ editButton.addEventListener('click', openPopup);
 form.addEventListener('submit', savePopup);
 
 like.forEach((value) => {
-  value.addEventListener('click', () => {
-    value.classList.toggle('element__like_active');
+  value.addEventListener('click', (evt) => {
+    evt.target.classList.toggle('element__like_active');
   });
 });
