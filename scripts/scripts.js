@@ -1,16 +1,16 @@
-let editButton = document.querySelector('.profile__edit-button');
-let popup = document.querySelector('.popup');
-let closeButton = document.querySelector('.popup__close');
-let form = document.querySelector('.popup__container');
-let titleName = document.querySelector('.profile__title');
-let username = document.querySelector('.popup__input_name_full-name');
-let subName = document.querySelector('.profile__subtitle');
-let occupation = document.querySelector('.popup__input_name_occupation');
-let like = document.querySelectorAll('.element__like');
+const editButton = document.querySelector('.profile__edit-button');
+const popup = document.querySelector('.popup');
+const closeButton = document.querySelector('.popup__close');
+const form = document.querySelector('.popup__container');
+const titleName = document.querySelector('.profile__title');
+const username = document.querySelector('.popup__input_name_full-name');
+const subName = document.querySelector('.profile__subtitle');
+const occupation = document.querySelector('.popup__input_name_occupation');
+const like = document.querySelectorAll('.element__like');
 
 function tooglePopup() {
   popup.classList.toggle('popup_active');
-};
+}
 
 function openPopup() {
   tooglePopup();
@@ -26,8 +26,9 @@ function savePopup(event) {
 }
 
 popup.addEventListener('click', (event) => {
-  if (event.target === event.currentTarget)
-  tooglePopup();
+  if (event.target === event.currentTarget) {
+    tooglePopup();
+  }
 });
 
 closeButton.addEventListener('click', tooglePopup);
