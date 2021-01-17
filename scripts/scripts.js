@@ -47,6 +47,9 @@ function renderCard(item, sort = false) {
   card.querySelector('.element__like').addEventListener('click', (evt) => {
     evt.target.classList.toggle('element__like_active');
   });
+  card.querySelector('.element__trash').addEventListener('click', (evt) => {
+    evt.target.closest('.element').remove();
+  });
   if (sort) { elementList.append(card); } else { elementList.prepend(card); }
 }
 
