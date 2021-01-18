@@ -38,14 +38,14 @@ const popupCard = document.querySelector('.popup_type_card');
 const addCard = document.querySelector('.profile__add-button');
 const closeButtonCard = document.querySelector('.popup__close_card');
 const formCard = document.querySelector('.popup__container_card');
-const popupImage = document.querySelector('.popup-image');
-const closeButtonImage = document.querySelector('.popup-image__close');
+const popupImage = document.querySelector('.popup_type_image');
+const closeButtonImage = document.querySelector('.popup__close_image');
 
 function handleImage(evt) {
   const image = evt.target.closest('.element');
-  popupImage.querySelector('.popup-image__image').src = image.querySelector('.element__image').src;
-  popupImage.querySelector('.popup-image__text').textContent = image.querySelector('.element__title').textContent;
-  popupImage.classList.add('popup-image_active');
+  popupImage.querySelector('.popup__image').src = image.querySelector('.element__image').src;
+  popupImage.querySelector('.popup__text').textContent = image.querySelector('.element__title').textContent;
+  popupImage.classList.add('popup_active');
 }
 
 function tooglePopup(popup) {
@@ -111,7 +111,7 @@ popupProfile.addEventListener('click', (event) => {
 
 popupImage.addEventListener('click', (event) => {
   if (event.target === event.currentTarget) {
-    popupImage.classList.remove('popup-image_active');
+    popupImage.classList.remove('popup_active');
   }
 });
 
@@ -123,5 +123,5 @@ addCard.addEventListener('click', () => openPopup(popupCard));
 closeButtonCard.addEventListener('click', () => tooglePopup(popupCard));
 formCard.addEventListener('submit', (evt) => savePopup(popupCard, evt));
 closeButtonImage.addEventListener('click', () => {
-  popupImage.classList.remove('popup-image_active');
+  popupImage.classList.remove('popup_active');
 });
