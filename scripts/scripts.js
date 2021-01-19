@@ -1,7 +1,7 @@
 const editButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_type_profile');
 const closeButtonProfile = document.querySelector('.popup__close_profile');
-const formProfile = document.querySelector('.popup__container_profile');
+const formProfile = document.querySelector('.popup__form_profile');
 const titleName = document.querySelector('.profile__title');
 const userName = document.querySelector('.popup__input_name_full-name');
 const subName = document.querySelector('.profile__subtitle');
@@ -37,28 +37,33 @@ const elementList = document.querySelector('.elements__list');
 const popupCard = document.querySelector('.popup_type_card');
 const addCard = document.querySelector('.profile__add-button');
 const closeButtonCard = document.querySelector('.popup__close_card');
-const formCard = document.querySelector('.popup__container_card');
+const formCard = document.querySelector('.popup__form_card');
 const popupImage = document.querySelector('.popup_type_image');
 const closeButtonImage = document.querySelector('.popup__close_image');
+let popupActive;
 
 function closePopup(popup) {
-  popup.removeEventListener('click', () => { });
+  popup.removeEventListener('click', closeOverleyPopup);
   popup.classList.remove('popup_active');
 }
 
-function openPopup(popup) {
-  popup.classList.toggle('popup_active');
-  popup.addEventListener('click', (event) => {
-    if (event.target === event.currentTarget) {
-      closePopup(popup);
-    }
-  });
+function closeOverleyPopup(event) {
+  if (event.target === event.currentTarget) {
+    closePopup(popupActive);
+  }
 }
 
-function handleImage(evt) {
-  const image = evt.target.closest('.element');
-  popupImage.querySelector('.popup__image').src = image.querySelector('.element__image').src;
-  popupImage.querySelector('.popup__text').textContent = image.querySelector('.element__title').textContent;
+function openPopup(popup) {
+  popup.classList.add('popup_active');
+  popupActive = popup;
+  popup.addEventListener('click', closeOverleyPopup);
+}
+
+function handleImage(name, link) {
+  const tempImg = popupImage.querySelector('.popup__image');
+  tempImg.src = link;
+  tempImg.alt = name;
+  popupImage.querySelector('.popup__text').textContent = name;
   openPopup(popupImage);
 }
 
@@ -77,7 +82,7 @@ function createCard(name, link) {
   trash.addEventListener('click', (evt) => {
     evt.target.closest('.element').remove();
   });
-  image.addEventListener('click', (evt) => handleImage(evt));
+  image.addEventListener('click', () => handleImage(name, link));
   return card;
 }
 
@@ -92,6 +97,7 @@ function saveCard(event) {
     link: popupCard.querySelector('.popup__input_name_link').value,
   };
   addCardCont(elementList, createCard(card.name, card.link));
+  formCard.reset();
   closePopup(popupCard);
 }
 
