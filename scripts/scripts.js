@@ -98,14 +98,14 @@ function saveCard(event) {
   };
   addCardCont(elementList, createCard(card.name, card.link));
   formCard.reset();
-  closePopup(popupCard);
+  closePopup(popupActive);
 }
 
 function saveProfile(event) {
   event.preventDefault();
   titleName.textContent = userName.value;
   subName.textContent = occupation.value;
-  closePopup(popupProfile);
+  closePopup(popupActive);
 }
 
 const renderCards = (cards) => {
@@ -115,7 +115,7 @@ const renderCards = (cards) => {
 };
 
 renderCards(initialCards);
-closeButtonProfile.addEventListener('click', () => closePopup(popupProfile));
+closeButtonProfile.addEventListener('click', () => closePopup(popupActive));
 editButton.addEventListener('click', () => {
   openPopup(popupProfile);
   userName.value = titleName.textContent;
@@ -123,8 +123,8 @@ editButton.addEventListener('click', () => {
 });
 formProfile.addEventListener('submit', (evt) => saveProfile(evt));
 addCard.addEventListener('click', () => openPopup(popupCard));
-closeButtonCard.addEventListener('click', () => closePopup(popupCard));
+closeButtonCard.addEventListener('click', () => closePopup(popupActive));
 formCard.addEventListener('submit', (evt) => saveCard(evt));
 closeButtonImage.addEventListener('click', () => {
-  closePopup(popupImage);
+  closePopup(popupActive);
 });
