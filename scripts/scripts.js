@@ -40,6 +40,12 @@ const closeButtonCard = document.querySelector('.popup__close_card');
 const formCard = document.querySelector('.popup__form_card');
 const popupImage = document.querySelector('.popup_type_image');
 const closeButtonImage = document.querySelector('.popup__close_image');
+const tempImg = popupImage.querySelector('.popup__image');
+const textImg = popupImage.querySelector('.popup__text');
+const newCard = {
+  name: document.querySelector('.popup__input_name_title').value,
+  link: document.querySelector('.popup__input_name_link').value,
+};
 let popupActive;
 
 function closePopup(popup) {
@@ -70,10 +76,9 @@ function openPopup(popup) {
 }
 
 function handleImage(name, link) {
-  const tempImg = popupImage.querySelector('.popup__image');
   tempImg.src = link;
   tempImg.alt = name;
-  popupImage.querySelector('.popup__text').textContent = name;
+  textImg.textContent = name;
   openPopup(popupImage);
 }
 
@@ -102,11 +107,7 @@ function addCardCont(container, cardElement) {
 
 function saveCard(event) {
   event.preventDefault();
-  const card = {
-    name: popupCard.querySelector('.popup__input_name_title').value,
-    link: popupCard.querySelector('.popup__input_name_link').value,
-  };
-  addCardCont(elementList, createCard(card.name, card.link));
+  addCardCont(elementList, createCard(newCard.name, newCard.link));
   formCard.reset();
   closePopup(popupActive);
 }
