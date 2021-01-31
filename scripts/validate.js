@@ -36,7 +36,6 @@ const setEventListeners = (formElement, vilidationConfig) => {
   const buttonElement = formElement.querySelector(vilidationConfig.submitButtonSelector);
 
   inputList.forEach((inputElement) => {
-    checkInputValidity(formElement, inputElement, vilidationConfig);
     toggleButtonState(inputList, buttonElement, vilidationConfig);
     inputElement.addEventListener('input', () => {
       checkInputValidity(formElement, inputElement, vilidationConfig);
