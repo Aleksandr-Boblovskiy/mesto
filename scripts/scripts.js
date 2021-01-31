@@ -43,7 +43,10 @@ const closeButtonImage = document.querySelector('.popup__close_image');
 let popupActive;
 
 function closePopup(popup) {
-  popup.removeEventListener('click', closeOverleyPopup);
+  // eslint-disable-next-line no-use-before-define
+  popup.removeEventListener('mousedown', closeOverleyPopup);
+  // eslint-disable-next-line no-use-before-define
+  document.removeEventListener('keydown', closePopupByEsc);
   popup.classList.remove('popup_active');
 }
 
@@ -53,10 +56,17 @@ function closeOverleyPopup(event) {
   }
 }
 
+function closePopupByEsc(event) {
+  if (event.key === 'Escape') {
+    closePopup(popupActive);
+  }
+}
+
 function openPopup(popup) {
   popup.classList.add('popup_active');
   popupActive = popup;
-  popup.addEventListener('click', closeOverleyPopup);
+  popup.addEventListener('mousedown', closeOverleyPopup);
+  document.addEventListener('keydown', closePopupByEsc);
 }
 
 function handleImage(name, link) {
