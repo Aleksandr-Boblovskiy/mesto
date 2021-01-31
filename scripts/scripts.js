@@ -43,8 +43,8 @@ const closeButtonImage = document.querySelector('.popup__close_image');
 const tempImg = popupImage.querySelector('.popup__image');
 const textImg = popupImage.querySelector('.popup__text');
 const newCard = {
-  name: document.querySelector('.popup__input_name_title').value,
-  link: document.querySelector('.popup__input_name_link').value,
+  name: document.querySelector('.popup__input_name_title'),
+  link: document.querySelector('.popup__input_name_link'),
 };
 let popupActive;
 
@@ -107,7 +107,7 @@ function addCardCont(container, cardElement) {
 
 function saveCard(event) {
   event.preventDefault();
-  addCardCont(elementList, createCard(newCard.name, newCard.link));
+  addCardCont(elementList, createCard(newCard.name.value, newCard.link.value));
   formCard.reset();
   closePopup(popupActive);
 }
