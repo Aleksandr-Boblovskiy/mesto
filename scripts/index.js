@@ -41,7 +41,17 @@ const formCard = document.querySelector('.popup__form_card');
 const closeButtonImage = document.querySelector('.popup__close_image');
 let popupActive;
 
+const validationSettings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+}
+
 import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
 
 function closePopup(popup) {
   // eslint-disable-next-line no-use-before-define
@@ -70,52 +80,15 @@ function openPopup(popup) {
   document.addEventListener('keydown', closePopupByEsc);
 }
 
-/*
-function handleImage(name, link) {
-  tempImg.src = link;
-  tempImg.alt = name;
-  textImg.textContent = name;
-  openPopup(popupImage);
-}
-
-
-
-function createCard(name, link) {
-  const card = cardTemplate.cloneNode(true);
-  const image = card.querySelector('.element__image');
-  const text = card.querySelector('.element__title');
-  const like = card.querySelector('.element__like');
-  const trash = card.querySelector('.element__trash');
-  image.src = link;
-  image.alt = name;
-  text.textContent = name;
-  like.addEventListener('click', (evt) => {
-    evt.target.classList.toggle('element__like_active');
-  });
-  trash.addEventListener('click', (evt) => {
-    evt.target.closest('.element').remove();
-  });
-  image.addEventListener('click', () => handleImage(name, link));
-  return card;
-}
-
-function addCardCont(container, cardElement) {
-  container.prepend(cardElement);
-}
-*/
-
 function saveCard(event) {
   event.preventDefault();
-
   const item = {
     name: document.querySelector('.popup__input_name_title').value,
     link: document.querySelector('.popup__input_name_link').value,
   }
-
   const card = new Card(item, '#element-template', openPopup);
   const cardElement = card.generateCard();
   elementList.prepend(cardElement);
-  // addCardCont(elementList, createCard(newCard.name.value, newCard.link.value));
   formCard.reset();
   closePopup(popupActive);
 }
@@ -149,4 +122,11 @@ closeButtonCard.addEventListener('click', () => closePopup(popupActive));
 formCard.addEventListener('submit', (evt) => saveCard(evt));
 closeButtonImage.addEventListener('click', () => {
   closePopup(popupActive);
+});
+
+const formList = Array.from(document.querySelectorAll('.popup__form'));
+
+formList.forEach(form => {
+  const formValid = new FormValidator(validationSettings, form);
+  formValid.enableValidation();
 });
