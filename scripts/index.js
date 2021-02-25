@@ -46,7 +46,6 @@ const popupImage = document.querySelector('.popup_type_image');
 const tempImg = popupImage.querySelector('.popup__image');
 const textImg = popupImage.querySelector('.popup__text');
 let popupActive;
-
 const validationSettings = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -55,6 +54,9 @@ const validationSettings = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible',
 }
+const profileFormValidation = new FormValidator(validationSettings, formProfile);
+const cardFormValidation = new FormValidator(validationSettings, formCard);
+
 
 
 function closePopup(popup) {
@@ -96,10 +98,6 @@ function createCard(item) {
   return card.generateCard();
 }
 
-function newFormValid(validSet, form) {
-  return new FormValidator(validSet, form);
-}
-
 function saveCard(event) {
   event.preventDefault();
   const item = {
@@ -108,7 +106,7 @@ function saveCard(event) {
   }
   elementList.prepend(createCard(item));
   formCard.reset();
-  newFormValid(validationSettings, formCard).disableButtonSubmit();
+  cardFormValidation.disableButtonSubmit();
   closePopup(popupActive);
 }
 
@@ -126,6 +124,8 @@ const renderCards = (cards) => {
 };
 
 renderCards(initialCards);
+profileFormValidation.enableValidation();
+cardFormValidation.enableValidation();
 closeButtonProfile.addEventListener('click', () => closePopup(popupActive));
 editButton.addEventListener('click', () => {
   openPopup(popupProfile);
@@ -140,8 +140,3 @@ closeButtonImage.addEventListener('click', () => {
   closePopup(popupActive);
 });
 
-const formList = Array.from(document.querySelectorAll('.popup__form'));
-
-formList.forEach(form => {
-  newFormValid(validationSettings, form).enableValidation();
-});
