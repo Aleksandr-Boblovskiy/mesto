@@ -18,14 +18,14 @@ export default class FormValidator {
     errorElement.classList.add(this._errorClass);
   }
 
-  _hideInputError = (inputElement) => {
+  _hideInputError(inputElement) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = '_';
   };
 
-  _checkInputValidity = (inputElement) => {
+  _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
     } else {
@@ -34,7 +34,9 @@ export default class FormValidator {
   };
 
   // eslint-disable-next-line max-len
-  _hasInvalidInput = (inputList) => inputList.some((inputElement) => !inputElement.validity.valid);
+  _hasInvalidInput(inputList) {
+    inputList.some((inputElement) => !inputElement.validity.valid)
+  };
 
   _toggleButtonState(inputList) {
     if (this._hasInvalidInput(inputList)) {
