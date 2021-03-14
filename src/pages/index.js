@@ -79,17 +79,15 @@ cardsList.render();
 const popupAddCard = new PopupWithForm('.popup_type_card', (item) => {
   const cardElement = createCard(item);
   cardsList.addItem(cardElement);
+  cardFormValidation.disableButtonSubmit();
 });
 
 popupAddCard.setEventListeners();
 
 const user = new UserInfo('.profile__title', '.profile__subtitle');
-
 const popupUser = new PopupWithForm('.popup_type_profile', (item) => {
   user.setUserInfo(item);
 });
-
-
 
 popupUser.setEventListeners();
 
@@ -97,13 +95,11 @@ profileFormValidation.enableValidation();
 cardFormValidation.enableValidation();
 
 editButton.addEventListener('click', () => {
-
-  const userN = user.getUserInfo();
-  userName.value = userN.fullname;
-  occupation.value = userN.occupationn;
+  const userData = user.getUserInfo();
+  userName.value = userData.fullname;
+  occupation.value = userData.occupationn;
   popupUser.open();
 });
-
 
 addCard.addEventListener('click', () => {
   popupAddCard.open();
