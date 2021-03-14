@@ -54,10 +54,10 @@ const profileFormValidation = new FormValidator(validationSettings, formProfile)
 const cardFormValidation = new FormValidator(validationSettings, formCard);
 
 const popupImg = new PopupWithImage('.popup_type_image');
+popupImg.setEventListeners();
 
 function handlePopupCardOpen(link, name) {
   popupImg.open(link, name);
-  popupImg.setEventListeners();
 }
 
 function createCard(item) {
@@ -80,7 +80,6 @@ cardsList.render();
 const popupAddCard = new PopupWithForm('.popup_type_card', (item) => {
   const cardElement = createCard(item);
   cardsList.addItem(cardElement);
-  cardFormValidation.disableButtonSubmit();
 });
 
 popupAddCard.setEventListeners();
@@ -104,5 +103,6 @@ editButton.addEventListener('click', () => {
 
 addCard.addEventListener('click', () => {
   popupAddCard.open();
+  cardFormValidation.disableButtonSubmit();
 });
 

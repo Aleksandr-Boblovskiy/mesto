@@ -33,9 +33,9 @@ export default class FormValidator {
     }
   };
 
-  // eslint-disable-next-line max-len
+
   _hasInvalidInput(inputList) {
-    inputList.some((inputElement) => !inputElement.validity.valid)
+    return inputList.some((inputElement) => !inputElement.validity.valid)
   };
 
   _toggleButtonState(inputList) {
@@ -55,6 +55,12 @@ export default class FormValidator {
         this._checkInputValidity(inputElement);
         this._toggleButtonState(inputList);
       });
+    });
+    this._formElement.addEventListener('reset', () => {
+      inputList.forEach((inputElement) => {
+        this._hideInputError(inputElement)
+        this._toggleButtonState(inputList, buttonElement);
+      })
     });
   };
 
