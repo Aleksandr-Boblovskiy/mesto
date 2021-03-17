@@ -5,35 +5,9 @@ import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import Api from '../components/Api.js';
 
-
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-  },
-];
+let cardsList;
 
 const editButton = document.querySelector('.profile__edit-button');
 const formProfile = document.querySelector('.popup__form_profile');
@@ -52,6 +26,48 @@ const validationSettings = {
 }
 const profileFormValidation = new FormValidator(validationSettings, formProfile);
 const cardFormValidation = new FormValidator(validationSettings, formCard);
+const user = new UserInfo('.profile__title', '.profile__subtitle', '.profile__avatar');
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-21',
+  headers: {
+    authorization: '5f90b346-f8ab-40ea-a16b-fbb4288c433c',
+    'Content-Type': 'application/json'
+  }
+});
+
+
+
+api.getInitialCards()
+  .then((result) => {
+    // обрабатываем результат
+
+    cardsList = new Section(
+      {
+        items: result,
+        renderer: (item) => {
+          const cardElement = createCard(item);
+          cardsList.addItem(cardElement);
+
+        },
+      }, '.elements__list'
+    )
+    cardsList.render();
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
+
+api.getUserInfo()
+  .then((result) => {
+    user.setUserInfo(result);
+  })
+  .catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
+
+
+
 
 const popupImg = new PopupWithImage('.popup_type_image');
 popupImg.setEventListeners();
@@ -60,33 +76,42 @@ function handlePopupCardOpen(link, name) {
   popupImg.open(link, name);
 }
 
+function handleCardDelete(id) {
+  return api.deleteCard(id);
+}
+
 function createCard(item) {
-  const card = new Card(item, '#element-template', handlePopupCardOpen);
+  const card = new Card(item, '#element-template', handlePopupCardOpen, handleCardDelete);
   return card.generateCard();
 }
 
-const cardsList = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => {
-      const cardElement = createCard(item);
-      cardsList.addItem(cardElement);
-    },
-  }, '.elements__list'
-)
-
-cardsList.render();
-
 const popupAddCard = new PopupWithForm('.popup_type_card', (item) => {
-  const cardElement = createCard(item);
-  cardsList.addItem(cardElement);
+  api.pullNewCard(item)
+    .then((result) => {
+
+      const cardElement = createCard(result);
+      cardsList.addItem(cardElement);
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
 });
+
+
 
 popupAddCard.setEventListeners();
 
-const user = new UserInfo('.profile__title', '.profile__subtitle');
+
 const popupUser = new PopupWithForm('.popup_type_profile', (item) => {
-  user.setUserInfo(item);
+
+  api.pullUserInfo(item)
+    .then((result) => {
+
+      user.setUserInfo(result);
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
 });
 
 popupUser.setEventListeners();
@@ -96,8 +121,8 @@ cardFormValidation.enableValidation();
 
 editButton.addEventListener('click', () => {
   const userData = user.getUserInfo();
-  userName.value = userData.fullname;
-  occupation.value = userData.occupationn;
+  userName.value = userData.name;
+  occupation.value = userData.about;
   popupUser.open();
 });
 
