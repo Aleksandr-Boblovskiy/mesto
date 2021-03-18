@@ -47,7 +47,7 @@ api.getInitialCards()
         items: result,
         renderer: (item) => {
           const cardElement = createCard(item);
-          cardsList.addItem(cardElement);
+          cardsList.addItem(cardElement, false);
 
         },
       }, '.elements__list'
@@ -80,8 +80,16 @@ function handleCardDelete(id) {
   return api.deleteCard(id);
 }
 
+function handleLikeCard(id) {
+  return api.likeCard(id);
+}
+
+function handleDeleteLike(id) {
+  return api.deleteLikeCard(id);
+}
+
 function createCard(item) {
-  const card = new Card(item, '#element-template', handlePopupCardOpen, handleCardDelete);
+  const card = new Card(item, '#element-template', handlePopupCardOpen, handleCardDelete, handleLikeCard, handleDeleteLike);
   return card.generateCard();
 }
 
@@ -90,7 +98,7 @@ const popupAddCard = new PopupWithForm('.popup_type_card', (item) => {
     .then((result) => {
 
       const cardElement = createCard(result);
-      cardsList.addItem(cardElement);
+      cardsList.addItem(cardElement, true);
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль

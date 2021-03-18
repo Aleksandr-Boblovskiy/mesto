@@ -111,6 +111,45 @@ export default class Api {
       });
   }
 
+  deleteLikeCard(id) {
+    return fetch(this._baseUrl + '/cards/likes/' + id, {
+      method: 'DELETE',
+      headers: {
+        authorization: '5f90b346-f8ab-40ea-a16b-fbb4288c433c',
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        // если ошибка, отклоняем промис
+        return Promise.reject(`Ошибка: ${res.status}`);
+      });
+  }
+
+
+  likeCard(id) {
+    return fetch(this._baseUrl + '/cards/likes/' + id, {
+      method: 'PUT',
+      headers: {
+        authorization: '5f90b346-f8ab-40ea-a16b-fbb4288c433c',
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        // если ошибка, отклоняем промис
+        return Promise.reject(`Ошибка: ${res.status}`);
+      });
+  }
+
+
+
   // другие методы работы с API
 }
 
