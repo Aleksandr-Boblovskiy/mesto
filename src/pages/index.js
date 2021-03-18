@@ -15,6 +15,8 @@ const userName = document.querySelector('.popup__input_name_full-name');
 const occupation = document.querySelector('.popup__input_name_occupation');
 const addCard = document.querySelector('.profile__add-button');
 const formCard = document.querySelector('.popup__form_card');
+const avatar = document.querySelector('.profile__container');
+const formAvatar = document.querySelector('.popup__form_avatar');
 
 const validationSettings = {
   formSelector: '.popup__form',
@@ -26,6 +28,7 @@ const validationSettings = {
 }
 const profileFormValidation = new FormValidator(validationSettings, formProfile);
 const cardFormValidation = new FormValidator(validationSettings, formCard);
+const avatarFormValidation = new FormValidator(validationSettings, formAvatar);
 const user = new UserInfo('.profile__title', '.profile__subtitle', '.profile__avatar');
 
 const api = new Api({
@@ -67,7 +70,24 @@ api.getUserInfo()
   });
 
 
+const popupAvatar = new PopupWithForm('.popup_type_avatar', (item) => {
+  api.pullNewAvatar(item)
+    .then((result) => {
 
+      api.getUserInfo()
+        .then((result) => {
+          user.setUserInfo(result);
+        })
+        .catch((err) => {
+          console.log(err); // выведем ошибку в консоль
+        });
+
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+});
+popupAvatar.setEventListeners();
 
 const popupImg = new PopupWithImage('.popup_type_image');
 popupImg.setEventListeners();
@@ -139,3 +159,7 @@ addCard.addEventListener('click', () => {
   cardFormValidation.disableButtonSubmit();
 });
 
+avatar.addEventListener('click', () => {
+  popupAvatar.open();
+
+})

@@ -1,0 +1,23 @@
+.profile__container {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  position: relative;
+  cursor: pointer;
+}
+
+
+.profile__container:hover:after {
+  background-image: url('../../../images/ava.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  content: '';
+  z-index: 5;
+  height: 26px;
+  width: 26px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+

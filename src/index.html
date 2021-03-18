@@ -16,7 +16,9 @@
     <main class="content page__content">
       <section class="profile content__section section section_type_narrow">
         <div class="profile__place">
-          <img class="profile__avatar" src="./images/Avatar.jpg" alt="Фото пользователя">
+          <div class="profile__container">
+            <img class="profile__avatar" alt="Фото пользователя">
+          </div>
           <div class="profile__info">
             <div class="profile__title-button">
               <h1 class="profile__title"></h1>
@@ -42,10 +44,10 @@
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form popup__form_profile" name="popup-user" action="" method="POST" novalidate>
           <input type="text" id="name-input" required class="popup__input popup__input_name_full-name" name="name"
-            placeholder="Иванов Иван" value="Жак-Ив Кусто" minlength="2" maxlength="40">
+            placeholder="Имя" value="" minlength="2" maxlength="40">
           <span class="popup__error name-input-error">_</span>
           <input type="text" id="occupation-input" required class="popup__input popup__input_name_occupation"
-            name="about" placeholder="Студент" value="Исследователь океана" minlength="2" maxlength="200">
+            name="about" placeholder="О себе" value="" minlength="2" maxlength="200">
           <span class="popup__error occupation-input-error">_</span>
           <button type="submit" class="popup__button">Сохранить</button>
         </form>
@@ -66,6 +68,19 @@
           <button type="submit" class="popup__button">Создать</button>
         </form>
         <button type="button" class="popup__close popup__close_card"></button>
+      </div>
+    </section>
+
+    <section class="popup popup_type_avatar">
+      <div class="popup__container popup__container_card">
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form popup__form_avatar" name="popup-avatar" action="" method="POST" novalidate>
+          <input type="url" id="link-input" required class="popup__input popup__input_name_avatar" name="avatar"
+            placeholder="Ссылка на новый аватар">
+          <span class="popup__error link-input-error">_</span>
+          <button type="submit" class="popup__button">Сохранить</button>
+        </form>
+        <button type="button" class="popup__close popup__close_avatar"></button>
       </div>
     </section>
 
