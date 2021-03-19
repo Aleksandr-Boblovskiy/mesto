@@ -30,6 +30,7 @@ const profileFormValidation = new FormValidator(validationSettings, formProfile)
 const cardFormValidation = new FormValidator(validationSettings, formCard);
 const avatarFormValidation = new FormValidator(validationSettings, formAvatar);
 const user = new UserInfo('.profile__title', '.profile__subtitle', '.profile__avatar');
+let textButtonSubmit;
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-21',
@@ -39,48 +40,60 @@ const api = new Api({
   }
 });
 
-
-
-api.getInitialCards()
-  .then((result) => {
-    // обрабатываем результат
-
-    cardsList = new Section(
-      {
-        items: result,
-        renderer: (item) => {
-          const cardElement = createCard(item);
-          cardsList.addItem(cardElement, false);
-
-        },
-      }, '.elements__list'
-    )
-    cardsList.render();
-  })
-  .catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
+function loadingStatus(loading) {
+  if (loading) {
+    textButtonSubmit = document.querySelector('.popup_active').querySelector('.popup__button');
+    textButtonSubmit.textContent = 'Сохранение...';
+  } else {
+    textButtonSubmit.textContent = 'Сохранить';
+  }
+}
 
 api.getUserInfo()
-  .then((result) => {
-    user.setUserInfo(result);
+  .then((userData) => {
+    user.setInfo(userData);
+
+    api.getInitialCards()
+      .then((result) => {
+        // обрабатываем результат
+
+        cardsList = new Section(
+          {
+            items: result,
+            renderer: (item) => {
+              item.userId = userData._id;
+              const cardElement = createCard(item);
+              cardsList.addItem(cardElement, false);
+
+            },
+          }, '.elements__list'
+        )
+        cardsList.render();
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      });
+
   })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
   });
+
 
 
 const popupAvatar = new PopupWithForm('.popup_type_avatar', (item) => {
+  loadingStatus(true);
   api.pullNewAvatar(item)
     .then((result) => {
 
       api.getUserInfo()
         .then((result) => {
-          user.setUserInfo(result);
+          user.setInfo(result);
         })
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
-        });
+        })
+        .finally(() => loadingStatus(false));
 
     })
     .catch((err) => {
@@ -97,7 +110,15 @@ function handlePopupCardOpen(link, name) {
 }
 
 function handleCardDelete(id) {
-  return api.deleteCard(id);
+  const popupDelete = new PopupWithForm('.popup_type_delete', () => {
+    api.deleteCard(id)
+      .then((result) => this._element.closest('.element').remove())
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      });
+  });
+  popupDelete.setEventListeners();
+  popupDelete.open();
 }
 
 function handleLikeCard(id) {
@@ -114,41 +135,41 @@ function createCard(item) {
 }
 
 const popupAddCard = new PopupWithForm('.popup_type_card', (item) => {
+  loadingStatus(true);
   api.pullNewCard(item)
     .then((result) => {
-
-      const cardElement = createCard(result);
+      const cardElement = createCard({ ...result, userId: user.getInfo()._id });
       cardsList.addItem(cardElement, true);
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
-    });
+    })
+    .finally(() => loadingStatus(false));
 });
-
-
 
 popupAddCard.setEventListeners();
 
-
 const popupUser = new PopupWithForm('.popup_type_profile', (item) => {
-
+  loadingStatus(true);
   api.pullUserInfo(item)
     .then((result) => {
 
-      user.setUserInfo(result);
+      user.setInfo(result);
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
-    });
+    })
+    .finally(() => loadingStatus(false));
 });
 
 popupUser.setEventListeners();
 
 profileFormValidation.enableValidation();
 cardFormValidation.enableValidation();
+avatarFormValidation.enableValidation();
 
 editButton.addEventListener('click', () => {
-  const userData = user.getUserInfo();
+  const userData = user.getInfo();
   userName.value = userData.name;
   occupation.value = userData.about;
   popupUser.open();
@@ -161,5 +182,4 @@ addCard.addEventListener('click', () => {
 
 avatar.addEventListener('click', () => {
   popupAvatar.open();
-
 })

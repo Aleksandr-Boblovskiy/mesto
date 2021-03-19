@@ -65,7 +65,7 @@
           <input type="url" id="link-input" required class="popup__input popup__input_name_link" name="link"
             placeholder="Ссылка на картинку">
           <span class="popup__error link-input-error">_</span>
-          <button type="submit" class="popup__button">Создать</button>
+          <button type="submit" class="popup__button">Сохранить</button>
         </form>
         <button type="button" class="popup__close popup__close_card"></button>
       </div>
@@ -81,6 +81,16 @@
           <button type="submit" class="popup__button">Сохранить</button>
         </form>
         <button type="button" class="popup__close popup__close_avatar"></button>
+      </div>
+    </section>
+
+    <section class="popup popup_type_delete">
+      <div class="popup__container popup__container_card">
+        <h2 class="popup__title">Вы уверены?</h2>
+        <form class="popup__form popup__form_delete" name="popup-delete" action="" method="POST" novalidate>
+          <button type="submit" class="popup__button">Да</button>
+        </form>
+        <button type="button" class="popup__close popup__close_delete"></button>
       </div>
     </section>
 
@@ -102,7 +112,7 @@
         <h2 class="element__title"></h2>
         <div class="element__like-container">
           <button type="button" class="element__like"></button>
-          <p class="element__likes">10</p>
+          <p class="element__likes"></p>
         </div>
       </div>
     </li>

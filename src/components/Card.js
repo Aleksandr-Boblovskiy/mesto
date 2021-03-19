@@ -10,7 +10,7 @@ export default class Card {
     this._handleCardDelete = handleCardDelete;
     this._handleLikeCard = handleLikeCard;
     this._handleDeleteLike = handleDeleteLike;
-
+    this._userId = data.userId;
   }
 
   _getTemplate() {
@@ -31,6 +31,9 @@ export default class Card {
     this._element.querySelector('.element__title').textContent = this._text;
     this._like = this._element.querySelector('.element__like');
     this._element.querySelector('.element__likes').textContent = this._likes.length;
+    if (this._owner._id !== this._userId) {
+      this._element.querySelector('.element__trash').style.display = 'none';
+    }
     this._setEventListeners();
     return this._element;
   }
@@ -59,13 +62,9 @@ export default class Card {
       }
     });
     this._element.querySelector('.element__trash').addEventListener('click', () => {
-
-      this._handleCardDelete(this._id)
-        .then((result) => this._element.closest('.element').remove())
-        .catch((err) => {
-          console.log(err); // выведем ошибку в консоль
-        });
+      this._handleCardDelete(this._id);
     });
+
     this._img.addEventListener('click', () => {
       this._handleImageClick(this._linkImage, this._text)
     });
