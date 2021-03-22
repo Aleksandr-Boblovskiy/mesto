@@ -4,28 +4,23 @@ export default class Api {
     this._headers = { headers };
   }
 
+  _resultCheck(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    // если ошибка, отклоняем промис
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
+
+
   getInitialCards() {
     return fetch(this._baseUrl + '/cards', this._headers)
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._resultCheck);
   }
 
   getUserInfo() {
     return fetch(this._baseUrl + '/users/me', this._headers)
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._resultCheck);
   }
 
   pullUserInfo({ name, about }) {
@@ -40,14 +35,7 @@ export default class Api {
         about
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._resultCheck);
   }
 
   pullNewCard({ name, link }) {
@@ -62,14 +50,7 @@ export default class Api {
         link
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._resultCheck);
   }
 
   pullNewAvatar(linkAvatar) {
@@ -83,14 +64,7 @@ export default class Api {
         linkAvatar
       )
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._resultCheck);
   }
 
   deleteCard(id) {
@@ -101,14 +75,7 @@ export default class Api {
         'Content-Type': 'application/json'
       },
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._resultCheck);
   }
 
   deleteLikeCard(id) {
@@ -119,16 +86,8 @@ export default class Api {
         'Content-Type': 'application/json'
       },
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._resultCheck);
   }
-
 
   likeCard(id) {
     return fetch(this._baseUrl + '/cards/likes/' + id, {
@@ -138,18 +97,8 @@ export default class Api {
         'Content-Type': 'application/json'
       },
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(this._resultCheck);
   }
 
-
-
-  // другие методы работы с API
 }
 

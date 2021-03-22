@@ -30,7 +30,11 @@ export default class Card {
     this._img.alt = this._text;
     this._element.querySelector('.element__title').textContent = this._text;
     this._like = this._element.querySelector('.element__like');
-    this._element.querySelector('.element__likes').textContent = this._likes.length;
+    this._likesSelector = this._element.querySelector('.element__likes')
+    if (this._likes.some(like => like._id === this._userId)) {
+      this._like.classList.add('element__like_active');
+    }
+    this._likesSelector.textContent = this._likes.length;
     if (this._owner._id !== this._userId) {
       this._element.querySelector('.element__trash').style.display = 'none';
     }
@@ -41,28 +45,13 @@ export default class Card {
   _setEventListeners() {
     this._element.querySelector('.element__like').addEventListener('click', () => {
       if (!this._like.classList.contains('element__like_active')) {
-
-        this._handleLikeCard(this._id)
-          .then((result) => {
-            this._element.querySelector('.element__like').classList.add('element__like_active');
-            this._element.querySelector('.element__likes').textContent = result.likes.length;
-          })
-          .catch((err) => {
-            console.log(err); // выведем ошибку в консоль
-          });
+        this._handleLikeCard(this);
       } else {
-        this._handleDeleteLike(this._id)
-          .then((result) => {
-            this._element.querySelector('.element__like').classList.remove('element__like_active');
-            this._element.querySelector('.element__likes').textContent = result.likes.length;
-          })
-          .catch((err) => {
-            console.log(err); // выведем ошибку в консоль
-          });
+        this._handleDeleteLike(this);
       }
     });
     this._element.querySelector('.element__trash').addEventListener('click', () => {
-      this._handleCardDelete(this._id);
+      this._handleCardDelete(this);
     });
 
     this._img.addEventListener('click', () => {
@@ -70,10 +59,22 @@ export default class Card {
     });
   }
 
-  // _handleLikeClick() {
-  //   this._element.querySelector('.element__like').classList.toggle('element__like_active');
-  // }
+  getId() {
+    return this._id;
+  }
 
+  setLikesInfo(data) {
+    if (data.likes.some(like => like._id === this._userId)) {
+      this._like.classList.add('element__like_active');
+      this._likesSelector.textContent = data.likes.length;
+    } else {
+      this._like.classList.remove('element__like_active');
+      this._likesSelector.textContent = data.likes.length;
+    }
+  }
 
+  removeCard() {
+    this._element.remove();
+  }
 
 }
